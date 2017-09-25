@@ -1,0 +1,17 @@
+{
+  "name": "notificator",
+  "version": "0.0.1",
+  "description": "Notification bot when open trade is closed.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "LabZone",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^4.0.0",
+    "kraken-api": "^1.0.0",
+    "nodemailer": "^4.1.0",
+    "underscore": "^1.8.3"
+  }
+}
