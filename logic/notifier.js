@@ -1,6 +1,6 @@
 const _ = require('underscore');
 const email = require('../notifications/email');
-
+const store = require('../utils/store');
 const kraken = require('../exchanges/kraken');
 
 
@@ -19,6 +19,8 @@ const run = () => {
   kraken.getOpenOrders()
     .then((orders) => {
       if (orders.result.open) {
+        const ordersMemory = store.readStore().openOrders || [];
+
         const openOrders = Object.keys(orders.result.open);
         const closedOrders = _.difference(ordersMemory, openOrders);
         //TODO: Handle difference order if exists
@@ -32,13 +34,23 @@ const run = () => {
           //getClosedOrderInformation('OGTYC7-N6TIG-RCKKC3');
         }
         //TODO: Load orders to memory
-        ordersMemory = openOrders;
+        store.updateStore({
+          'openOrders': openOrders,
+        });
+
         console.log('Open orders stored in memory');
         console.log(ordersMemory);
         setTimeout(run, 1000 * 60 * 15); //TODO> Set tick in .env
       }
     })
-    .catch(error => console.log(error.statusCode));
+    .catch((error) => {
+      if (error.statusCode === 504 || error.statusCode === 520) {
+        console.log(`Error ${error.statusCode} getting order information. Will try again after 5 seconds.`)
+        setTimeout(() => {
+          run();
+        }, 5000);
+      }
+    });
 };
 
 const getClosedOrderInformation = (txid) => {

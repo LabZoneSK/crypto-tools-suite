@@ -4,12 +4,14 @@
   "description": "Notification bot when open trade is closed.",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "test": "node test.js"
   },
   "author": "LabZone",
   "license": "MIT",
   "dependencies": {
     "dotenv": "^4.0.0",
+    "fs": "^0.0.1-security",
     "kraken-api": "^1.0.0",
     "node-bittrex-api": "^0.8.1",
     "nodemailer": "^4.1.0",
