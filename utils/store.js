@@ -9,7 +9,7 @@ const updateStore = (data) => {
 };
 
 const readStore = () => {
-  if (fs.existsSync(path)) {
+  if (fs.existsSync(DATA_FILE)) {
     return JSON.parse(fs.readFileSync(DATA_FILE));
   } else {
     return {};
