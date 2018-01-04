@@ -1,10 +1,10 @@
 {
-  "name": "notificator",
+  "name": "crypto-tools-suite",
   "version": "0.0.1",
-  "description": "Notification bot when open trade is closed.",
+  "description": "Simple tools for traing in crypto world.",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "notifier": "node notifier/index.js",
     "test": "node test.js"
   },
   "author": "LabZone",
